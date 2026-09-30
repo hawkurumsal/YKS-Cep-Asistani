@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#07130d">
+<title>YKS Cep Asistanı • PC</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100%;
+  background:#040a07;
+  color:#f2f7f4;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  padding:25px;
+}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  width:100%;
+  max-width:1450px;
+  margin:auto;
+}
+
+/* HEADER */
+
+.header{
+  background:
+    radial-gradient(circle at 90% 20%,rgba(35,130,76,.18),transparent 30%),
+    linear-gradient(135deg,#10271a,#07120c);
+  border:1px solid #1d4730;
+  border-radius:24px;
+  padding:28px 32px;
+  margin-bottom:20px;
+  box-shadow:0 15px 50px rgba(0,0,0,.35);
+}
+
+.logo{
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.subtitle{
+  color:#8ea598;
+  margin-top:7px;
+  font-size:14px;
+}
+
+/* GRID */
+
+.dashboard{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:20px;
+}
+
+.left-column,
+.right-column{
+  min-width:0;
+}
+
+/* CARDS */
+
+.card{
+  background:#0a1510;
+  border:1px solid #193b29;
+  border-radius:21px;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:0 9px 30px rgba(0,0,0,.22);
+}
+
+.card-title{
+  font-size:18px;
+  font-weight:900;
+  margin-bottom:17px;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.time-box{
+  background:#06100a;
+  border:1px solid #1d3c2a;
+  border-radius:16px;
+  padding:20px 8px;
+  text-align:center;
+}
+
+.time-number{
+  font-size:35px;
+  font-weight:900;
+  font-variant-numeric:tabular-nums;
+}
+
+.time-label{
+  color:#70877a;
+  font-size:10px;
+  font-weight:700;
+  margin-top:5px;
+}
+
+/* STATS */
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.stat-box{
+  background:#06100a;
+  border:1px solid #193829;
+  border-radius:16px;
+  padding:18px;
+  text-align:center;
+}
+
+.stat-number{
+  font-size:34px;
+  font-weight:900;
+}
+
+.stat-label{
+  color:#82978b;
+  font-size:12px;
+  margin-top:5px;
+}
+
+/* PROGRESS */
+
+.progress{
+  width:100%;
+  height:10px;
+  background:#050c08;
+  border-radius:30px;
+  overflow:hidden;
+  margin:16px 0 9px;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:#3fd27b;
+  border-radius:30px;
+  transition:.25s;
+}
+
+.progress-text{
+  text-align:center;
+  color:#809589;
+  font-size:12px;
+}
+
+/* TIMER */
+
+.timer{
+  text-align:center;
+  padding:10px 0;
+}
+
+.timer-display{
+  font-size:82px;
+  font-weight:900;
+  letter-spacing:3px;
+  font-variant-numeric:tabular-nums;
+  margin:12px 0 25px;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+button{
+  min-height:46px;
+  padding:10px 14px;
+  border-radius:13px;
+  border:1px solid #24563b;
+  background:#10251a;
+  color:#fff;
+  font-weight:800;
+  transition:.15s;
+}
+
+button:hover{
+  filter:brightness(1.18);
+}
+
+button:active{
+  transform:scale(.97);
+}
+
+button.primary{
+  background:#176b3c;
+  border-color:#299457;
+}
+
+button.danger{
+  background:#341515;
+  border-color:#713131;
+}
+
+.grade{
+  margin-top:18px;
+  background:#06100a;
+  border:1px solid #193829;
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+}
+
+.grade-title{
+  color:#73897d;
+  font-size:11px;
+  font-weight:700;
+}
+
+.grade-value{
+  font-size:22px;
+  font-weight:900;
+  margin-top:5px;
+}
+
+/* QUESTIONS */
+
+.question-input{
+  display:flex;
+  gap:10px;
+}
+
+input{
+  outline:none;
+}
+
+.question-input input,
+.custom-row input,
+.spotify-input input,
+.date-input{
+  flex:1;
+  min-width:0;
+  background:#06100a;
+  color:#fff;
+  border:1px solid #244533;
+  border-radius:12px;
+  padding:12px 13px;
+}
+
+.question-input button{
+  min-width:120px;
+}
+
+/* SETTINGS */
+
+.setting-section{
+  margin-bottom:22px;
+}
+
+.setting-title{
+  color:#91a79b;
+  font-size:12px;
+  margin-bottom:9px;
+}
+
+.setting-buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+
+.setting-buttons button{
+  min-height:42px;
+}
+
+.custom-row{
+  display:flex;
+  gap:9px;
+  margin-top:9px;
+}
+
+/* DAYS */
+
+.days{
+  display:grid;
+  gap:10px;
+}
+
+.day-row{
+  display:grid;
+  grid-template-columns:100px 1fr 75px;
+  align-items:center;
+  gap:12px;
+}
+
+.day-name{
+  color:#91a69a;
+  font-size:12px;
+}
+
+.day-progress{
+  height:9px;
+  background:#050d08;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.day-fill{
+  width:0%;
+  height:100%;
+  background:#318e59;
+  border-radius:20px;
+}
+
+.day-count{
+  color:#91a69a;
+  font-size:12px;
+  text-align:right;
+}
+
+/* SPOTIFY */
+
+.spotify-box{
+  background:#050d08;
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.spotify-input{
+  display:flex;
+  gap:9px;
+  padding:11px;
+}
+
+.spotify-input button{
+  min-width:95px;
+}
+
+.spotify-frame{
+  width:100%;
+  height:180px;
+  border:0;
+  display:none;
+}
+
+/* HISTORY */
+
+.history{
+  display:grid;
+  gap:8px;
+  max-height:310px;
+  overflow-y:auto;
+}
+
+.history-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:12px 14px;
+  background:#050d08;
+  border:1px solid #132d20;
+  border-radius:12px;
+  color:#94a79c;
+  font-size:12px;
+}
+
+/* FOOTER */
+
+.footer{
+  text-align:center;
+  padding:18px 0 8px;
+  color:#53685c;
+  font-size:12px;
+}
+
+.footer strong{
+  color:#72877a;
+}
+
+/* FOCUS MODE */
+
+.focus-overlay{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  color:#000;
+  z-index:99999;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  padding:40px;
+}
+
+.focus-overlay.active{
+  display:flex;
+}
+
+.focus-time{
+  font-size:clamp(70px,10vw,150px);
+  font-weight:900;
+  letter-spacing:4px;
+  font-variant-numeric:tabular-nums;
+  margin-bottom:35px;
+}
+
+.focus-controls{
+  width:min(800px,100%);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.focus-controls button{
+  min-height:55px;
+  background:#000;
+  color:#fff;
+  border:0;
+}
+
+.focus-exit{
+  width:min(800px,100%);
+  margin-top:10px;
+}
+
+.focus-exit button{
+  width:100%;
+  background:#eee;
+  color:#000;
+  border:1px solid #bbb;
+}
+
+/* TABLET / SMALL PC */
+
+@media(max-width:1000px){
+
+  body{
+    padding:15px;
+  }
+
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .timer-display{
+    font-size:65px;
+  }
+
+}
+
+/* SMALL SCREEN */
+
+@media(max-width:650px){
+
+  .countdown{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .buttons{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+
+  .setting-buttons{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .header{
+    padding:21px;
+  }
+
+  .logo{
+    font-size:26px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <div class="logo">🖥️ YKS Cep Asistanı</div>
+    <div class="subtitle">
+      PC Çalışma Paneli • Hedeflerini takip et • YKS'ye hazırlan
+    </div>
+  </div>
+
+
+  <div class="dashboard">
+
+    <!-- SOL -->
+    <div class="left-column">
+
+      <!-- COUNTDOWN -->
+      <div class="card">
+        <div class="card-title">🎯 YKS 2027'ye Kalan</div>
+
+        <div class="countdown">
+
+          <div class="time-box">
+            <div class="time-number" id="days">0</div>
+            <div class="time-label">GÜN</div>
+          </div>
+
+          <div class="time-box">
+            <div class="time-number" id="hours">00</div>
+            <div class="time-label">SAAT</div>
+          </div>
+
+          <div class="time-box">
+            <div class="time-number" id="minutes">00</div>
+            <div class="time-label">DAKİKA</div>
+          </div>
+
+          <div class="time-box">
+            <div class="time-number" id="seconds">00</div>
+            <div class="time-label">SANİYE</div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- TIMER -->
+      <div class="card">
+
+        <div class="card-title">⏱️ Çalışma Sayacı</div>
+
+        <div class="timer">
+
+          <div class="timer-display" id="timerDisplay">
+            00:00:00
+          </div>
+
+          <div class="buttons">
+
+            <button class="primary" onclick="startTimer()">
+              ▶ Başlat
+            </button>
+
+            <button onclick="pauseTimer()">
+              ⏸ Durdur
+            </button>
+
+            <button onclick="resetTimer()">
+              ↻ Sıfırla
+            </button>
+
+            <button onclick="enterFocus()">
+              ⚪ Odak Modu
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="grade">
+          <div class="grade-title">
+            ÇALIŞMA DERECESİ
+          </div>
+
+          <div class="grade-value" id="grade">
+            Başlamadın
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- BUGÜN -->
+      <div class="card">
+
+        <div class="card-title">📊 Bugünkü Durum</div>
+
+        <div class="stats-grid">
+
+          <div class="stat-box">
+            <div class="stat-number" id="todayQuestions">
+              0
+            </div>
+            <div class="stat-label">
+              Çözülen soru
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-number" id="todayTime">
+              0 dk
+            </div>
+            <div class="stat-label">
+              Çalışma süresi
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-number" id="todayXP">
+              0 XP
+            </div>
+            <div class="stat-label">
+              Kazanılan XP
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-number" id="dailyTargetStat">
+              100
+            </div>
+            <div class="stat-label">
+              Günlük hedef
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SORU HEDEFİ -->
+      <div class="card">
+
+        <div class="card-title">
+          📝 Bugünkü Soru Hedefi
+        </div>
+
+        <div class="big-stat">
+          <div
+            class="stat-number"
+            id="questionMain"
+          >
+            0 / 100
+          </div>
+        </div>
+
+        <div class="progress">
+          <div
+            class="progress-bar"
+            id="questionProgress">
+          </div>
+        </div>
+
+        <div
+          class="progress-text"
+          id="questionProgressText">
+          0%
+        </div>
+
+        <div
+          class="question-input"
+          style="margin-top:15px;"
+        >
+
+          <input
+            type="number"
+            min="1"
+            id="questionInput"
+            placeholder="Çözdüğün soru sayısı"
+          >
+
+          <button
+            class="primary"
+            onclick="addQuestions()">
+            SORU EKLE
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- YILLIK -->
+      <div class="card">
+
+        <div class="card-title">
+          🏆 Yıllık Soru Hedefi
+        </div>
+
+        <div class="big-stat">
+          <div
+            class="stat-number"
+            id="yearQuestions">
+            0
+          </div>
+
+          <div
+            class="stat-label"
+            id="yearTargetText">
+            / 50.000 soru
+          </div>
+        </div>
+
+        <div class="progress">
+          <div
+            class="progress-bar"
+            id="yearProgress">
+          </div>
+        </div>
+
+        <div
+          class="progress-text"
+          id="yearProgressText">
+          0%
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SAĞ -->
+    <div class="right-column">
+
+      <!-- HEDEFLER -->
+      <div class="card">
+
+        <div class="card-title">
+          ⚙️ Hedef Ayarları
+        </div>
+
+        <div class="setting-section">
+
+          <div class="setting-title">
+            Günlük soru hedefi
+          </div>
+
+          <div class="setting-buttons">
+
+            <button onclick="setDailyTarget(50)">
+              50
+            </button>
+
+            <button onclick="setDailyTarget(75)">
+              75
+            </button>
+
+            <button onclick="setDailyTarget(100)">
+              100
+            </button>
+
+            <button onclick="setDailyTarget(150)">
+              150
+            </button>
+
+          </div>
+
+          <div class="custom-row">
+
+            <input
+              type="number"
+              min="1"
+              id="customDaily"
+              placeholder="Özel günlük hedef"
+            >
+
+            <button onclick="setCustomDaily()">
+              AYARLA
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="setting-section">
+
+          <div class="setting-title">
+            Yıllık soru hedefi
+          </div>
+
+          <div class="setting-buttons">
+
+            <button onclick="setYearlyTarget(30000)">
+              30K
+            </button>
+
+            <button onclick="setYearlyTarget(50000)">
+              50K
+            </button>
+
+            <button onclick="setYearlyTarget(75000)">
+              75K
+            </button>
+
+            <button onclick="setYearlyTarget(100000)">
+              100K
+            </button>
+
+          </div>
+
+          <div class="custom-row">
+
+            <input
+              type="number"
+              min="1"
+              id="customYearly"
+              placeholder="Özel yıllık hedef"
+            >
+
+            <button onclick="setCustomYearly()">
+              AYARLA
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="setting-section">
+
+          <div class="setting-title">
+            YKS tarihi
+          </div>
+
+          <div class="custom-row">
+
+            <input
+              type="datetime-local"
+              class="date-input"
+              id="examDateInput"
+            >
+
+            <button onclick="saveExamDate()">
+              KAYDET
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SON 7 GÜN -->
+      <div class="card">
+
+        <div class="card-title">
+          📅 Son 7 Gün
+        </div>
+
+        <div
+          class="days"
+          id="last7Days">
+        </div>
+
+      </div>
+
+
+      <!-- SPOTIFY -->
+      <div class="card">
+
+        <div class="card-title">
+          🎵 Spotify Çalışma Müziği
+        </div>
+
+        <div class="spotify-box">
+
+          <div class="spotify-input">
+
+            <input
+              type="text"
+              id="playlistInput"
+              placeholder="Spotify playlist linkini yapıştır"
+            >
+
+            <button onclick="loadPlaylist()">
+              YÜKLE
+            </button>
+
+          </div>
+
+          <iframe
+            id="spotifyFrame"
+            class="spotify-frame"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy">
+          </iframe>
+
+        </div>
+
+      </div>
+
+
+      <!-- GEÇMİŞ -->
+      <div class="card">
+
+        <div class="card-title">
+          📜 Çalışma Geçmişi
+        </div>
+
+        <div
+          class="history"
+          id="history">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    YKS Cep Asistanı • PC Edition<br>
+    <strong>Hawk5 tarafından tasarlandı</strong>
+  </div>
+
+</div>
+
+
+<!-- ODAK MODU -->
+
+<div
+  class="focus-overlay"
+  id="focusOverlay">
+
+  <div
+    class="focus-time"
+    id="focusTime">
+    00:00:00
+  </div>
+
+  <div class="focus-controls">
+
+    <button onclick="startTimer()">
+      ▶ Başlat
+    </button>
+
+    <button onclick="pauseTimer()">
+      ⏸ Durdur
+    </button>
+
+    <button onclick="resetTimer()">
+      ↻ Sıfırla
+    </button>
+
+    <button onclick="exitFocus()">
+      ✕ Çık
+    </button>
+
+  </div>
+
+  <div class="focus-exit">
+
+    <button onclick="exitFocus()">
+      Odak Modundan Çık
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   VERİ
+========================= */
+
+const STORAGE_KEY =
+  "YKS_CEP_ASISTANI_PC_V1";
+
+const DEFAULT_EXAM_DATE =
+  "2027-06-19T10:15";
+
+let data = {
+  dailyTarget:100,
+  yearlyTarget:50000,
+  examDate:DEFAULT_EXAM_DATE,
+  questions:{},
+  sessions:{},
+  current:0,
+  running:false
+};
+
+try{
+
+  const saved =
+    localStorage.getItem(STORAGE_KEY);
+
+  if(saved){
+
+    data = {
+      ...data,
+      ...JSON.parse(saved)
+    };
+
+  }
+
+}catch(e){
+
+  console.log("Kayıt okunamadı.");
+
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveData(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+function dateKey(date=new Date()){
+
+  const y =
+    date.getFullYear();
+
+  const m =
+    String(date.getMonth()+1)
+      .padStart(2,"0");
+
+  const d =
+    String(date.getDate())
+      .padStart(2,"0");
+
+  return `${y}-${m}-${d}`;
+
+}
+
+
+function getToday(){
+
+  return dateKey();
+
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+function getTodayQuestions(){
+
+  return Number(
+    data.questions[getToday()] || 0
+  );
+
+}
+
+
+function getYearQuestions(){
+
+  const year =
+    new Date().getFullYear();
+
+  let total = 0;
+
+  for(const key in data.questions){
+
+    if(key.startsWith(year+"-")){
+
+      total +=
+        Number(data.questions[key]) || 0;
+
+    }
+
+  }
+
+  return total;
+
+}
+
+
+/* =========================
+   XP
+========================= */
+
+function getXP(){
+
+  return (
+    getTodayQuestions()*2
+    +
+    Math.floor(
+      (data.sessions[getToday()] || 0)/60
+    )
+  );
+
+}
+
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+function updateCountdown(){
+
+  const target =
+    new Date(data.examDate).getTime();
+
+  const now =
+    Date.now();
+
+  let diff =
+    target-now;
+
+  if(diff < 0){
+    diff=0;
+  }
+
+  const days =
+    Math.floor(
+      diff/(1000*60*60*24)
+    );
+
+  diff %=
+    1000*60*60*24;
+
+  const hours =
+    Math.floor(
+      diff/(1000*60*60)
+    );
+
+  diff %=
+    1000*60*60;
+
+  const minutes =
+    Math.floor(
+      diff/(1000*60)
+    );
+
+  diff %=
+    1000*60;
+
+  const seconds =
+    Math.floor(
+      diff/1000
+    );
+
+  document.getElementById("days")
+    .textContent=days;
+
+  document.getElementById("hours")
+    .textContent=
+      String(hours).padStart(2,"0");
+
+  document.getElementById("minutes")
+    .textContent=
+      String(minutes).padStart(2,"0");
+
+  document.getElementById("seconds")
+    .textContent=
+      String(seconds).padStart(2,"0");
+
+}
+
+setInterval(
+  updateCountdown,
+  1000
+);
+
+
+/* =========================
+   QUESTIONS ADD
+========================= */
+
+function addQuestions(){
+
+  const input =
+    document.getElementById(
+      "questionInput"
+    );
+
+  const amount =
+    Number(input.value);
+
+  if(!amount || amount<1){
+    return;
+  }
+
+  const today =
+    getToday();
+
+  data.questions[today] =
+    Number(data.questions[today] || 0)
+    + amount;
+
+  input.value="";
+
+  saveData();
+  updateUI();
+
+}
+
+
+/* =========================
+   DAILY TARGET
+========================= */
+
+function setDailyTarget(value){
+
+  value=Number(value);
+
+  if(!value || value<1){
+    return;
+  }
+
+  data.dailyTarget=value;
+
+  saveData();
+  updateUI();
+
+}
+
+
+function setCustomDaily(){
+
+  const input =
+    document.getElementById(
+      "customDaily"
+    );
+
+  setDailyTarget(input.value);
+
+  input.value="";
+
+}
+
+
+/* =========================
+   YEAR TARGET
+========================= */
+
+function setYearlyTarget(value){
+
+  value=Number(value);
+
+  if(!value || value<1){
+    return;
+  }
+
+  data.yearlyTarget=value;
+
+  saveData();
+  updateUI();
+
+}
+
+
+function setCustomYearly(){
+
+  const input =
+    document.getElementById(
+      "customYearly"
+    );
+
+  setYearlyTarget(input.value);
+
+  input.value="";
+
+}
+
+
+/* =========================
+   EXAM DATE
+========================= */
+
+function saveExamDate(){
+
+  const input =
+    document.getElementById(
+      "examDateInput"
+    );
+
+  if(!input.value){
+    return;
+  }
+
+  data.examDate=input.value;
+
+  saveData();
+  updateCountdown();
+
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+let timerInterval=null;
+let lastTick=null;
+
+
+function startTimer(){
+
+  if(data.running){
+    return;
+  }
+
+  data.running=true;
+  lastTick=Date.now();
+
+  timerInterval =
+    setInterval(()=>{
+
+      const now=Date.now();
+
+      data.current +=
+        (now-lastTick)/1000;
+
+      lastTick=now;
+
+      updateTimerDisplay();
+
+    },250);
+
+  saveData();
+
+}
+
+
+function pauseTimer(){
+
+  if(!data.running){
+    return;
+  }
+
+  const now=Date.now();
+
+  data.current +=
+    (now-lastTick)/1000;
+
+  data.running=false;
+
+  clearInterval(timerInterval);
+
+  timerInterval=null;
+
+  commitCurrentTime();
+
+  saveData();
+  updateUI();
+
+}
+
+
+function resetTimer(){
+
+  if(data.running){
+    pauseTimer();
+  }
+
+  data.current=0;
+
+  saveData();
+  updateTimerDisplay();
+
+}
+
+
+function commitCurrentTime(){
+
+  const minutes =
+    Math.floor(
+      data.current/60
+    );
+
+  if(minutes>0){
+
+    const today =
+      getToday();
+
+    data.sessions[today] =
+      Number(data.sessions[today] || 0)
+      +minutes;
+
+  }
+
+  data.current=0;
+
+}
+
+
+/* =========================
+   TIME FORMAT
+========================= */
+
+function formatTime(totalSeconds){
+
+  totalSeconds =
+    Math.floor(totalSeconds);
+
+  const h =
+    Math.floor(
+      totalSeconds/3600
+    );
+
+  const m =
+    Math.floor(
+      (totalSeconds%3600)/60
+    );
+
+  const s =
+    totalSeconds%60;
+
+  return (
+    String(h).padStart(2,"0")
+    +":"
+    +String(m).padStart(2,"0")
+    +":"
+    +String(s).padStart(2,"0")
+  );
+
+}
+
+
+function updateTimerDisplay(){
+
+  const text =
+    formatTime(data.current);
+
+  document.getElementById(
+    "timerDisplay"
+  ).textContent=text;
+
+  document.getElementById(
+    "focusTime"
+  ).textContent=text;
+
+}
+
+
+/* =========================
+   FOCUS MODE
+========================= */
+
+function enterFocus(){
+
+  document.getElementById(
+    "focusOverlay"
+  ).classList.add("active");
+
+  updateTimerDisplay();
+
+}
+
+
+function exitFocus(){
+
+  document.getElementById(
+    "focusOverlay"
+  ).classList.remove("active");
+
+}
+
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key==="Escape"){
+      exitFocus();
+    }
+
+  }
+);
+
+
+/* =========================
+   GRADE
+========================= */
+
+function updateGrade(){
+
+  const minutes =
+    Number(
+      data.sessions[getToday()] || 0
+    )
+    +
+    Math.floor(
+      data.current/60
+    );
+
+  let grade="Başlamadın";
+
+  if(minutes>=180){
+    grade="🔥 Efsane";
+  }
+  else if(minutes>=120){
+    grade="💪 Çok İyi";
+  }
+  else if(minutes>=60){
+    grade="⚡ İyi";
+  }
+  else if(minutes>=30){
+    grade="📚 Isınıyorsun";
+  }
+  else if(minutes>0){
+    grade="🌱 Başladın";
+  }
+
+  document.getElementById(
+    "grade"
+  ).textContent=grade;
+
+}
+
+
+/* =========================
+   LAST 7 DAYS
+========================= */
+
+function updateLast7Days(){
+
+  const container =
+    document.getElementById(
+      "last7Days"
+    );
+
+  container.innerHTML="";
+
+  for(let i=6;i>=0;i--){
+
+    const d=new Date();
+
+    d.setDate(
+      d.getDate()-i
+    );
+
+    const key=dateKey(d);
+
+    const questions =
+      Number(
+        data.questions[key] || 0
+      );
+
+    const percent =
+      Math.min(
+        100,
+        questions/data.dailyTarget*100
+      );
+
+    const row =
+      document.createElement(
+        "div"
+      );
+
+    row.className="day-row";
+
+    const name =
+      d.toLocaleDateString(
+        "tr-TR",
+        {
+          weekday:"short",
+          day:"2-digit",
+          month:"2-digit"
+        }
+      );
+
+    row.innerHTML=`
+
+      <div class="day-name">
+        ${name}
+      </div>
+
+      <div class="day-progress">
+        <div
+          class="day-fill"
+          style="width:${percent}%">
+        </div>
+      </div>
+
+      <div class="day-count">
+        ${questions} soru
+      </div>
+
+    `;
+
+    container.appendChild(row);
+
+  }
+
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+function updateHistory(){
+
+  const container =
+    document.getElementById(
+      "history"
+    );
+
+  container.innerHTML="";
+
+  const keys=new Set([
+    ...Object.keys(data.questions),
+    ...Object.keys(data.sessions)
+  ]);
+
+  const sorted =
+    [...keys].sort().reverse();
+
+  if(sorted.length===0){
+
+    container.innerHTML=`
+      <div class="history-row">
+        <span>Henüz kayıt yok.</span>
+      </div>
+    `;
+
+    return;
+
+  }
+
+  sorted.slice(0,20).forEach(key=>{
+
+    const q =
+      Number(
+        data.questions[key] || 0
+      );
+
+    const min =
+      Number(
+        data.sessions[key] || 0
+      );
+
+    const row =
+      document.createElement(
+        "div"
+      );
+
+    row.className=
+      "history-row";
+
+    row.innerHTML=`
+      <span>${key}</span>
+      <span>${q} soru • ${min} dk</span>
+    `;
+
+    container.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================
+   SPOTIFY
+========================= */
+
+function getPlaylistId(url){
+
+  if(!url){
+    return null;
+  }
+
+  const match =
+    url.match(
+      /playlist\/([a-zA-Z0-9]+)/
+    );
+
+  return match
+    ? match[1]
+    : null;
+
+}
+
+
+function loadPlaylist(){
+
+  const input =
+    document.getElementById(
+      "playlistInput"
+    );
+
+  const url =
+    input.value.trim();
+
+  const id =
+    getPlaylistId(url);
+
+  if(!id){
+
+    alert(
+      "Geçerli bir Spotify playlist linki gir."
+    );
+
+    return;
+
+  }
+
+  localStorage.setItem(
+    "YKS_PC_PLAYLIST",
+    url
+  );
+
+  const frame =
+    document.getElementById(
+      "spotifyFrame"
+    );
+
+  frame.src =
+    "https://open.spotify.com/embed/playlist/"
+    +id
+    +"?utm_source=generator";
+
+  frame.style.display="block";
+
+}
+
+
+/* =========================
+   UI
+========================= */
+
+function updateUI(){
+
+  const todayQuestions =
+    getTodayQuestions();
+
+  const yearQuestions =
+    getYearQuestions();
+
+  const dailyPercent =
+    Math.min(
+      100,
+      todayQuestions/data.dailyTarget*100
+    );
+
+  const yearlyPercent =
+    Math.min(
+      100,
+      yearQuestions/data.yearlyTarget*100
+    );
+
+  document.getElementById(
+    "todayQuestions"
+  ).textContent=todayQuestions;
+
+  document.getElementById(
+    "dailyTargetStat"
+  ).textContent=data.dailyTarget;
+
+  document.getElementById(
+    "questionMain"
+  ).textContent=
+    todayQuestions
+    +" / "
+    +data.dailyTarget;
+
+  document.getElementById(
+    "questionProgress"
+  ).style.width=
+    dailyPercent+"%";
+
+  document.getElementById(
+    "questionProgressText"
+  ).textContent=
+    Math.round(dailyPercent)+"%";
+
+  document.getElementById(
+    "yearQuestions"
+  ).textContent=
+    yearQuestions.toLocaleString("tr-TR");
+
+  document.getElementById(
+    "yearTargetText"
+  ).textContent=
+    "/ "
+    +data.yearlyTarget.toLocaleString("tr-TR")
+    +" soru";
+
+  document.getElementById(
+    "yearProgress"
+  ).style.width=
+    yearlyPercent+"%";
+
+  document.getElementById(
+    "yearProgressText"
+  ).textContent=
+    Math.round(yearlyPercent)+"%";
+
+  const todayMinutes =
+    Number(
+      data.sessions[getToday()] || 0
+    )
+    +
+    Math.floor(
+      data.current/60
+    );
+
+  document.getElementById(
+    "todayTime"
+  ).textContent=
+    todayMinutes+" dk";
+
+  document.getElementById(
+    "todayXP"
+  ).textContent=
+    getXP()+" XP";
+
+  updateTimerDisplay();
+  updateGrade();
+  updateLast7Days();
+  updateHistory();
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+function initialize(){
+
+  const playlist =
+    localStorage.getItem(
+      "YKS_PC_PLAYLIST"
+    );
+
+  if(playlist){
+
+    document.getElementById(
+      "playlistInput"
+    ).value=playlist;
+
+    const id =
+      getPlaylistId(playlist);
+
+    if(id){
+
+      const frame =
+        document.getElementById(
+          "spotifyFrame"
+        );
+
+      frame.src =
+        "https://open.spotify.com/embed/playlist/"
+        +id
+        +"?utm_source=generator";
+
+      frame.style.display="block";
+
+    }
+
+  }
+
+  document.getElementById(
+    "examDateInput"
+  ).value=data.examDate;
+
+  updateCountdown();
+  updateUI();
+
+}
+
+initialize();
+
+
+/* =========================
+   PAGE CLOSE
+========================= */
+
+window.addEventListener(
+  "beforeunload",
+  function(){
+
+    if(data.running){
+
+      const now=Date.now();
+
+      data.current +=
+        (now-lastTick)/1000;
+
+      data.running=false;
+
+      clearInterval(timerInterval);
+
+      commitCurrentTime();
+
+    }
+
+    saveData();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
